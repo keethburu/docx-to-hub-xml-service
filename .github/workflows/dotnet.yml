@@ -19,7 +19,12 @@ jobs:
         repository: transpect/docx2hub-frontend
         submodules: true
         path: docx2hub
-    - name: Move docx2hub
+    - name: JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '8'
+    - name: Move docx2hub 
       run: |
         mv docx2hub /opt
         chmod +x /opt/docx2hub/docx2hub.sh
@@ -27,11 +32,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Setup JDK
-    - uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '8'
     - name: Restore dependencies
       run: dotnet restore ./Docx2HubSvc.sln
     - name: Build
