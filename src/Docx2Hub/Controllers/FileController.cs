@@ -18,24 +18,15 @@ using Docx2HubSvc.LeTex.Docx2hub.Cli;
 namespace Docx2HubSvc.Controllers
 {
 
-
-
-    //[Route("api/v{version:apiVersion}/[controller]")]
-    //[Route("api/[controller]")]
-    //[ApiVersion("1.0")]
-    //[ApiController]
-
     [ApiController]
     [Route("[controller]")]
     public partial class FileController : ControllerBase
     {
-
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> UploadAsync(IFormFile file)
         {
             try
             {
-
                 if (file.Length > 0)
                 {
                     var tempDir = Path.GetTempPath();
@@ -74,10 +65,6 @@ namespace Docx2HubSvc.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex}");
             }
-            
-           
         }
-
-       
     }
 }
