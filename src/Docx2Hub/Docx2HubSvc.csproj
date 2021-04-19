@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.0.13" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.0.14" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.0.13" />
+    <PackageReference Include="CliWrap" Version="3.3.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+    <PackageReference Include="MimeTypeMapOfficial" Version="1.0.15" />
+    <PackageReference Include="NLog" Version="4.7.9" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KeethBuru.Util.TempFile\KeethBuru.Util.TempFile.csproj" />
+  </ItemGroup>
+
+</Project>

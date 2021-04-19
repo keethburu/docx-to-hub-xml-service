@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  docx2hubsvc:
+    image: ${DOCKER_REGISTRY-}docx2hubsvc
+    build:
+      context: .
+      dockerfile: src\Docx2Hub\Dockerfile
