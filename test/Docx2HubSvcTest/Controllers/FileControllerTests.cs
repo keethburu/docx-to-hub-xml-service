@@ -6,6 +6,7 @@ using Docx2HubSvc.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.Json;
 using Moq;
 
 namespace Docx2HubSvcTest
@@ -28,6 +29,7 @@ namespace Docx2HubSvcTest
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
             var testDocx = Path.Combine(baseDir, @"Files", @"test.docx");
             var fileName = "testDoc.docx";
+            Assert.IsTrue(File.Exists(testDocx),$"{testDocx} does not exist");
             using var fs = new FileStream(testDocx, FileMode.Open, FileAccess.Read);
             using var ms = new MemoryStream();
             fs.CopyTo(ms);
@@ -46,7 +48,7 @@ namespace Docx2HubSvcTest
             var result = await sut.UploadAsync(file);
             //Debug.WriteLine(result.ToString());
 
-            Assert.IsInstanceOfType(result, typeof(PhysicalFileResult));
+            Assert.IsInstanceOfType(result, typeof(PhysicalFileResult),$"test failed {JsonSerializer.Serialize(result)}");
             //Assert
             // check https://stackoverflow.com/questions/64364989/github-actions-how-to-run-test-inside-container
             // Assert.IsInstanceOfType(result, typeof(IActionResult));
