@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build ./Docx2HubSvc.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test ./test/Docx2HubSvcTest/Docx2HubSvcTest.csproj --no-build --verbosity normal
+      run: dotnet test ./Docx2HubSvc.sln
