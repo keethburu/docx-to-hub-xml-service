@@ -47,8 +47,8 @@ namespace Docx2HubSvcTest
             //Act
             var result = await sut.UploadAsync(file);
             //Debug.WriteLine(result.ToString());
-
-            Assert.IsInstanceOfType(result, typeof(PhysicalFileResult),$"test failed {JsonSerializer.Serialize(result)}");
+            string resultString = JsonSerializer.Serialize(result);
+            Assert.IsInstanceOfType(result, typeof(PhysicalFileResult),$"test failed {resultString}");
             //Assert
             // check https://stackoverflow.com/questions/64364989/github-actions-how-to-run-test-inside-container
             // Assert.IsInstanceOfType(result, typeof(IActionResult));
