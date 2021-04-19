@@ -13,6 +13,13 @@ namespace Docx2HubSvcTest
     [TestClass]
     public class FileControllerTests
     {
+
+        [TestMethod]
+        public void Docx2HubExistsTest() {
+            var path = "/opt/docx2hub/docx2hub.sh";
+            Assert.IsTrue(System.IO.File.Exists(path),$"{path} does not exist");
+        }
+
         [TestMethod]
         public async Task UploadAsyncTest()
         {
