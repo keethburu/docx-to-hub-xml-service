@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: transpect/docx2hub-frontend
-        submodules: true
+        submodules: recursive
         path: docx2hub
     - name: JDK
       uses: actions/setup-java@v2
