@@ -16,8 +16,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\KeethBuru.Util.TempFile\KeethBuru.Util.TempFile.csproj" />
-  </ItemGroup>
-
 </Project>
