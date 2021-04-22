@@ -11,6 +11,7 @@ using System.Text;
 using CliWrap;
 using MimeTypes;
 using Docx2HubSvc.LeTex.Docx2hub.Cli;
+using Docx2HubSvc.Util;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,6 +22,9 @@ namespace Docx2HubSvc.Controllers
     [Route("[controller]")]
     public partial class FileController : ControllerBase
     {
+
+
+
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> UploadAsync(IFormFile file)
         {
@@ -28,24 +32,17 @@ namespace Docx2HubSvc.Controllers
             {
                 if (file.Length > 0)
                 {
-                    var tempDir = Path.GetTempPath();
-
-                    var requestId = Guid.NewGuid().ToString();
-
-                    var tempFileDir = Path.Combine(tempDir, requestId);
-                    var tempDirInf = new DirectoryInfo(tempFileDir);
-                    tempDirInf.Create();
+                    (string requestId, string tempFileDir) = Helper.GetRequestIdandTempDir();
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var normalizedFileName = requestId + ".docx";
                     var tempFilePath = Path.Combine(tempFileDir, normalizedFileName);
-
-                    ConversionResult cmdRes = null;
 
                     using (var tempFileStream = new FileStream(tempFilePath, mode: FileMode.Create)) {
                         file.CopyTo(tempFileStream);
                         tempFileStream.Close();
                     }
 
+                    ConversionResult cmdRes = null;
                     cmdRes = await Runner.Docx2HubAsync(tempFilePath);
 
                     if (cmdRes.ResultFilePath == null || System.IO.File.Exists(cmdRes.ResultFilePath) != true) {
