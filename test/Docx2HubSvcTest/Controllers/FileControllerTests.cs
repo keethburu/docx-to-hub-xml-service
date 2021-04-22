@@ -24,7 +24,7 @@ namespace Docx2HubSvcTest
         [TestMethod]
         public async Task UploadAsyncTest()
         {
-            //Arrange
+
             var fileMock = new Mock<IFormFile>();
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
             var testDocx = Path.Combine(baseDir, @"Files", @"test.docx");
@@ -41,17 +41,15 @@ namespace Docx2HubSvcTest
                 ms.CopyTo(s);
             });
             fileMock.Setup(_ => _.Length).Returns(ms.Length);
-            var sut = new FileController();
+            var serviceUnderTest = new FileController();
             var file = fileMock.Object;
 
-            //Act
-            var result = await sut.UploadAsync(file);
-            //Debug.WriteLine(result.ToString());
+   
+            var result = await serviceUnderTest.UploadAsync(file);
+
             string resultString = JsonSerializer.Serialize(result as Microsoft.AspNetCore.Mvc.ObjectResult);
             Assert.IsInstanceOfType(result, typeof(PhysicalFileResult),$"test failed {resultString}");
-            //Assert
-            // check https://stackoverflow.com/questions/64364989/github-actions-how-to-run-test-inside-container
-            // Assert.IsInstanceOfType(result, typeof(IActionResult));
+            
         }
     }
 }
